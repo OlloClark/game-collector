@@ -6,4 +6,7 @@ from django.http import HttpResponse
 
 # Define the home view
 def home(request):
-  return HttpResponse('<h1>Hello /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+	return HttpResponse('<h1>Game Collector Home Page</h1>')
+
+def about(request):
+	return HttpResponse("<h1>About the Game Collector<h1>")
