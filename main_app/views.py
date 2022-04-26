@@ -1,20 +1,7 @@
 from django.shortcuts import render
+from .models import Game
 
 # Create your views here.
-
-
-# TEMP DATA
-class Game:  # Note that parens are optional if not inheriting from another class
-  def __init__(self, name, publisher, players, theme):
-    self.name = name
-    self.publisher = publisher
-    self.players = players
-    self.theme = theme
-	
-games = [
-  	Game("Snap", "card games", 2, "easy time-passing"),
-  	Game("snakes n ladders", "hasbro", 2, "mindless chance"),
-]
 
 # Define the home view
 def home(request):
@@ -24,6 +11,11 @@ def about(request):
 	return render(request, "about.html")
 
 def games_index(request):
+	games = Game.objects.all()
 	return render(request, "games/index.html", {"games": games})
+
+def game_detail(request, game_id):
+	game = Game.objects.get(id=game_id)
+	return render(request, "games/detail.html", {"game": game})
 
 	
