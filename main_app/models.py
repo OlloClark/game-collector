@@ -16,3 +16,7 @@ class Game(models.Model):
 	
 	def get_absolute_url(self):
 		return reverse('detail', kwargs={'game_id': self.id})
+
+class Winner(models.Model):
+	winner = models.CharField(max_length=100)
+	date = models.DateField()
