@@ -1,7 +1,21 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Game
 
 # Create your views here.
+
+class GameCreate(CreateView):
+	model = Game
+	fields = "__all__"
+
+class GameUpdate(UpdateView):
+  model = Game
+  fields = ["min_players", "max_players", "play_time", "played_before", "notes"]
+
+class GameDelete(DeleteView):
+  model = Game
+  success_url = '/games/'
+
 
 # Define the home view
 def home(request):
