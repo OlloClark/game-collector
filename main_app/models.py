@@ -20,3 +20,9 @@ class Game(models.Model):
 class Winner(models.Model):
 	winner = models.CharField(max_length=100)
 	date = models.DateField()
+	# creates a game_id FK:
+	game = models.ForeignKey(Game, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f"{self.winner} won on {self.date}"
+	
