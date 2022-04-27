@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Game
 from .forms import WinnerForm
@@ -36,4 +36,11 @@ def game_detail(request, game_id):
 		"game": game, "winner_form": winner_form
 	})
 
+def add_winner(request, game_id):
+  form = WinnerForm(request.POST)
+  if form.is_valid():
+    new_winner = form.save(commit=False)
+    new_winner.game_id = game_id
+    new_winner.save()
+  return redirect('detail', game_id=game_id)
 	
