@@ -23,7 +23,7 @@ class Game(models.Model):
 	play_time = models.PositiveIntegerField()
 	played_before = models.BooleanField()
 	notes = models.TextField(max_length=500)
-	kit = models.ManyToManyField(Kit)
+	kits = models.ManyToManyField(Kit)
 
 	def __str__(self):
 		return self.name
