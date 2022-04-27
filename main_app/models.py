@@ -3,6 +3,12 @@ from django.urls import reverse
 
 # Create your models here.
 
+WINS = (
+	("E", "easy"),
+	("B", "balanced"),
+	("C", "close"),
+)
+
 class Game(models.Model):
 	name = models.CharField(max_length=100)
 	min_players = models.PositiveIntegerField()
@@ -18,8 +24,13 @@ class Game(models.Model):
 		return reverse('detail', kwargs={'game_id': self.id})
 
 class Winner(models.Model):
-	winner = models.CharField(max_length=100)
-	date = models.DateField()
+	winner = models.CharField(max_length=300)
+	date = models.DateField("win date")
+	win_type = models.CharField(
+		max_length=1,
+		choices=WINS,
+		default=WINS[0][1]
+	)
 	# creates a game_id FK:
 	game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
