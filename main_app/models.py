@@ -9,6 +9,13 @@ WINS = (
 	("C", "close"),
 )
 
+class Kit(models.Model):
+	name = models.CharField(max_length=50)
+	number = models.IntegerField()
+
+	def __str__(self):
+		return self.name
+
 class Game(models.Model):
 	name = models.CharField(max_length=100)
 	min_players = models.PositiveIntegerField()
@@ -16,6 +23,7 @@ class Game(models.Model):
 	play_time = models.PositiveIntegerField()
 	played_before = models.BooleanField()
 	notes = models.TextField(max_length=500)
+	kit = models.ManyToManyField(Kit)
 
 	def __str__(self):
 		return self.name
