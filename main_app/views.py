@@ -31,9 +31,11 @@ def games_index(request):
 
 def game_detail(request, game_id):
 	game = Game.objects.get(id=game_id)
+	kits_not_in_game = Kit.objects.exclude(id__in = game.kits.all().values_list("id"))
 	winner_form =WinnerForm()
 	return render(request, "games/detail.html", {
-		"game": game, "winner_form": winner_form
+		"game": game, "winner_form": winner_form,
+		"kit": kits_not_in_game
 	})
 
 def add_winner(request, game_id):
