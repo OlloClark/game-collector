@@ -26,7 +26,7 @@ class Game(models.Model):
 class Winner(models.Model):
 	winner = models.CharField(max_length=300)
 	date = models.DateField("win date")
-	win_type = models.CharField(
+	win = models.CharField(
 		max_length=1,
 		choices=WINS,
 		default=WINS[0][1]
