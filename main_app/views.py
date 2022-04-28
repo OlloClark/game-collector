@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Game
+from django.views.generic import ListView, DetailView
+from .models import Game, Kit
 from .forms import WinnerForm
 
 # Create your views here.
@@ -32,10 +33,10 @@ def games_index(request):
 def game_detail(request, game_id):
 	game = Game.objects.get(id=game_id)
 	kits_not_in_game = Kit.objects.exclude(id__in = game.kits.all().values_list("id"))
-	winner_form =WinnerForm()
+	winner_form = WinnerForm()
 	return render(request, "games/detail.html", {
 		"game": game, "winner_form": winner_form,
-		"kit": kits_not_in_game
+		"kits": kits_not_in_game
 	})
 
 def add_winner(request, game_id):

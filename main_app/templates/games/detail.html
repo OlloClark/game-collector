@@ -58,7 +58,30 @@
       <h5>No associated kit yet</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+  
+  <div class="col s6">
+    <h3>Available Kit</h3>
+    {% if kits.count %}
+      {% for kit in kits.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ kit.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{game.name}} uses all available kit</h5>
+    {% endif %}
+  </div>
+
 </div>
 
 <script>
